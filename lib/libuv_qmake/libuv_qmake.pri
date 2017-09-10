@@ -17,12 +17,12 @@ win32 {
     #HEADERS += $$PWD/../libuv/include/uv-win.h
 }
 
-unix:!macx {
+unix:!mac {
     HEADERS += $$PWD/../libuv/include/uv.h
     HEADERS += $$PWD/../libuv/include/uv-unix.h
 }
 
-macx: {
+mac: {
     HEADERS += $$PWD/../libuv/include/uv.h
     HEADERS += $$PWD/../libuv/include/uv-darwin.h
 }
@@ -98,13 +98,13 @@ unix {
         $$PWD/../libuv/src/unix/udp.c
 }
 
-unix:!macx {
+unix:!mac {
     SOURCES += $$PWD/../libuv/src/unix/linux-core.c \
         $$PWD/../libuv/src/unix/linux-inotify.c \
         $$PWD/../libuv/src/unix/linux-syscalls.c
 }
 
-macx {
+mac {
     SOURCES += $$PWD/../libuv/src/unix/darwin.c \
         $$PWD/../libuv/src/unix/darwin-proctitle.c \
         $$PWD/../libuv/src/unix/fsevents.c \

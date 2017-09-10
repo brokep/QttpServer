@@ -63,7 +63,7 @@ contains(CONFIG, SSL_TLS) {
         $$PWD/..
 
     # Currently this is specifically for mac + homebrew soft links.
-    macx: {
+    mac: {
         message('Adding openSSL libraries')
         # The user should be able to provide the exact location of openssl.
         INCLUDEPATH += /usr/local/opt/openssl/include

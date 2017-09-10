@@ -24,12 +24,12 @@ CONFIG(debug, debug|release) {
     }
 }
 
-macx: {
+mac: {
     LIBS += -framework CoreFoundation # -framework CoreServices
     QMAKE_CXXFLAGS += -g -O0 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=gnu++0x -stdlib=libc++
 }
 
-unix:!macx {
+unix:!mac {
     # This supports GCC 4.7
     QMAKE_CXXFLAGS += -g -O0 -lm -lpthread -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=c++0x
 }
