@@ -5,7 +5,7 @@ contains(CONFIG, SAMPLEAPP) {
     DESTDIR = $$PWD
     SOURCES += $$PWD/examples/sample/main.cpp
     TARGET = QttpServer
-    macx {
+    mac {
         # Since things are buried in the app folder, we'll copy configs there.
 
         Config.files = $$PWD/config/global.json $$PWD/config/routes.json

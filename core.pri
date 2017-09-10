@@ -18,7 +18,7 @@ CONFIG(debug, debug|release) {
 # This isn't an issue on TravisCI with Ubuntu14 so let's make this configurable.
 
 contains(CONFIG, HTTP_PARSER_WORKAROUND) {
-  unix:!macx {
+  unix:!mac {
       message('Adding http_parser.o on linux')
       OBJECTS += $$PWD/build/out/$$BUILDTYPE/obj.target/http_parser/lib/http-parser/http_parser.o
   }
@@ -66,7 +66,7 @@ contains(CONFIG, SSL_TLS) {
         $$PWD/lib
 
     # Currently this is specifically for mac + homebrew soft links.
-    macx: {
+    mac: {
         message('Adding openSSL libraries')
         # The user should be able to provide the exact location of openssl.
         INCLUDEPATH += /usr/local/opt/openssl/include
@@ -74,13 +74,13 @@ contains(CONFIG, SSL_TLS) {
     }
 }
 
-macx: {
+mac: {
     LIBS += -framework CoreFoundation # -framework CoreServices
     CONFIG += c++14
     QMAKE_CXXFLAGS += -g -O0 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=gnu++0x -stdlib=libc++
 }
 
-unix:!macx {
+unix:!mac {
     CONFIG += c++0x
     # This supports GCC 4.7
     QMAKE_CXXFLAGS += -g -O0 -lm -lpthread -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=c++0x
@@ -135,12 +135,11 @@ win32 {
     OBJECTS_DIR = $$PWD/build/$$QTBUILDTYPE
 }
 
-macx {
+mac {
     # Since things are buried in the app folder, we'll copy configs there.
 
     Web.files = $$PWD/www/swagger-ui.js $$PWD/www/swagger-ui.min.js \
         $$PWD/www/index.html $$PWD/www/o2c.html
-    Web.path = Contents/MacOS/www
 
     Css.files = $$PWD/www/css/print.css $$PWD/www/css/reset.css \
         $$PWD/www/css/screen.css $$PWD/www/css/style.css \
@@ -148,11 +147,9 @@ macx {
         $$PWD/www/css/theme-feeling-blue.css $$PWD/www/css/theme-monokai.css \
         $$PWD/www/css/theme-muted.css $$PWD/www/css/theme-newspaper.css \
         $$PWD/www/css/theme-outline.css
-    Css.path = Contents/MacOS/www/css
 
     Fonts.files = $$PWD/www/fonts/DroidSans-Bold.ttf \
         $$PWD/www/fonts/DroidSans.ttf
-    Fonts.path = Contents/MacOS/www/fonts
 
     Images.files = $$PWD/www/images/collapse.gif \
         $$PWD/www/images/expand.gif \
@@ -164,7 +161,6 @@ macx {
         $$PWD/www/images/pet_store_api.png \
         $$PWD/www/images/throbber.gif \
         $$PWD/www/images/wordnik_api.png
-    Images.path = Contents/MacOS/www/images
 
     Lang.files = $$PWD/www/lang/ca.js $$PWD/www/lang/en.js \
         $$PWD/www/lang/es.js $$PWD/www/lang/fr.js \
@@ -173,7 +169,6 @@ macx {
         $$PWD/www/lang/pl.js $$PWD/www/lang/pt.js \
         $$PWD/www/lang/ru.js $$PWD/www/lang/tr.js \
         $$PWD/www/lang/translator.js $$PWD/www/lang/zh-cn.js
-    Lang.path = Contents/MacOS/www/lang
 
     JsLib.files = $$PWD/www/lib/backbone-min.js \
         $$PWD/www/lib/es5-shim.js \
@@ -191,7 +186,23 @@ macx {
         $$PWD/www/lib/object-assign-pollyfill.js \
         $$PWD/www/lib/sanitize-html.min.js \
         $$PWD/www/lib/swagger-oauth.js
-    JsLib.path = Contents/MacOS/www/lib
+
+    ios{
+        Web.path =    www
+        Css.path =    www/css
+        Fonts.path =  www/fonts
+        Images.path = www/images
+        Lang.path =   www/lang
+        JsLib.path =  www/lib
+    }
+    macx{
+        Web.path =    Contents/MacOS/www
+        Css.path =    Contents/MacOS/www/css
+        Fonts.path =  Contents/MacOS/www/fonts
+        Images.path = Contents/MacOS/www/images
+        Lang.path =   Contents/MacOS/www/lang
+        JsLib.path =  Contents/MacOS/www/lib
+    }
 
     QMAKE_BUNDLE_DATA += Web Css Fonts Images JsLib
 }
