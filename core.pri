@@ -117,13 +117,13 @@ contains(TEMPLATE, lib) {
     }
 }
 
-MOC_DIR = $$PWD/build/$$QTBUILDTYPE
-RCC_DIR = $$PWD/build/$$QTBUILDTYPE
-UI_DIR = $$PWD/build/$$QTBUILDTYPE
+#MOC_DIR = $$PWD/build/$$QTBUILDTYPE
+#RCC_DIR = $$PWD/build/$$QTBUILDTYPE
+#UI_DIR = $$PWD/build/$$QTBUILDTYPE
 
-isEmpty(DESTDIR) {
-    DESTDIR = $$PWD/build/$$QTBUILDTYPE
-}
+#isEmpty(DESTDIR) {
+#    DESTDIR = $$PWD/build/$$QTBUILDTYPE
+#}
 
 win32 {
     LIBS += -L$$PWD/build/$$BUILDTYPE -L$$PWD/build/$$BUILDTYPE/lib
@@ -132,7 +132,7 @@ win32 {
 } else {
     LIBS += -L$$PWD/build/out/$$BUILDTYPE
     DEPENDPATH += $$PWD/build/out/$$BUILDTYPE
-    OBJECTS_DIR = $$PWD/build/$$QTBUILDTYPE
+#    OBJECTS_DIR = $$PWD/build/$$QTBUILDTYPE
 }
 
 mac {
